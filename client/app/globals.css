@@ -1,21 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Set dark mode values as default */
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 @theme inline {
-  --color-background: var(--background);
+  --color-background: var(--background); 
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* Optional: Keep light mode as a preference */
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #ffffff;
+    --background: #030134;
   }
 }
 
