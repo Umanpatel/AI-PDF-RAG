@@ -13,7 +13,7 @@ A full-stack application that allows users to upload PDF documents and chat with
 ## Tech Stack
 
 ### Frontend
-- Next.js 14
+- Next.js 15
 - React
 - Tailwind CSS
 - Clerk Authentication
@@ -39,7 +39,7 @@ A full-stack application that allows users to upload PDF documents and chat with
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/Umanpatel/AI-PDF-RAG
 ```
 
 2. Install dependencies:
@@ -109,11 +109,3 @@ npm run dev
 │   ├── index.js
 │   └── worker.js
 ```
-
-## License
-
-MIT
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
