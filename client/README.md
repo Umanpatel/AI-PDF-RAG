@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PDF RAG Chat Application
 
-## Getting Started
+A full-stack application that allows users to upload PDF documents and chat with an AI assistant about their contents using RAG (Retrieval Augmented Generation).
 
-First, run the development server:
+## Features
 
+- 📁 PDF file upload and processing
+- 💬 AI-powered chat interface
+- 🔍 Document retrieval using vector similarity search
+- 🔐 User authentication with Clerk
+- 🎨 Modern UI with Tailwind CSS
+
+## Tech Stack
+
+### Frontend
+- Next.js 14
+- React
+- Tailwind CSS
+- Clerk Authentication
+- TypeScript
+
+### Backend
+- Express.js
+- BullMQ for job queue
+- Multer for file uploads
+- LangChain.js
+- Qdrant Vector Database
+- OpenAI API
+
+## Prerequisites
+
+- Node.js 18+
+- Redis Server
+- Qdrant Server
+- OpenAI API Key
+- Clerk Account
+
+## Setup
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+# Install client dependencies
+cd client
+npm install
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Install server dependencies
+cd ../server
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Set up environment variables:
 
-## Learn More
+For the server (.env):
+```
+OPENAI_API_KEY=your_openai_api_key
+REDIS_HOST=localhost
+REDIS_PORT=6379
+QDRANT_URL=http://localhost:6333
+```
 
-To learn more about Next.js, take a look at the following resources:
+For the client (.env.local):
+```
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Start the services:
+```bash
+# Start Redis
+redis-server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Start Qdrant
+docker run -p 6333:6333 qdrant/qdrant
 
-## Deploy on Vercel
+# Start the backend server
+cd server
+npm start
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Start the frontend
+cd client
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Open http://localhost:3000 in your browser
+
+## How It Works
+
+1. Users upload PDF documents through the file upload interface
+2. The backend processes the PDF, splits it into chunks, and creates embeddings
+3. Embeddings are stored in the Qdrant vector database
+4. Users can ask questions about the documents through the chat interface
+5. The system retrieves relevant context using vector similarity search
+6. OpenAI's GPT model generates responses based on the retrieved context
+
+## Project Structure
+
+```
+├── client/
+│   ├── app/
+│   ├── components/
+│   └── public/
+├── server/
+│   ├── uploads/
+│   ├── index.js
+│   └── worker.js
+```
+
+## License
+
+MIT
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
